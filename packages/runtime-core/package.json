@@ -1,0 +1,14 @@
+{
+  "name": "@mini-vue/runtime-core",
+  "version": "1.0.0",
+  "description": "@mini-vue/runtime-core",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "ikkkp",
+  "license": "ISC",
+  "dependencies": {
+    "@mini-vue/shared": "workspace:^1.0.0"
+  }
+}
