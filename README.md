@@ -3,6 +3,8 @@
 #### 介绍
 实现最简 vue3 模型，用于深入学习 vue3， 更容易的理解 vue3 的核心逻辑
 
+
+
 #### 软件架构
 软件架构说明
 
@@ -18,6 +20,11 @@
 1.  xxxx
 2.  xxxx
 3.  xxxx
+
+#### Vue3 VNode渲染过程
+1.  createAppAPI(createApp)App的创建
+2.  mount-->createVNode-->render进行VNode的渲染和挂载
+3.  render-->patch diff算法的组件更新渲染
 
 #### 参与贡献
 
