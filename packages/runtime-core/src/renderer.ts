@@ -18,6 +18,8 @@ export function createRenderer(options) {
     createText: hostCreateText,
   } = options;
 
+  //render函数进行diff算法的patch
+  //container是一个dom节点对象，例：const rootContainer = document.querySelector("#root");
   const render = (vnode, container) => {
     console.log("调用 patch")
     patch(null, vnode, container);
@@ -580,7 +582,7 @@ export function createRenderer(options) {
         // 把 effect 推到微任务的时候在执行
         // queueJob(effect);
         queueJob(instance.update);
-        
+
       },
     });
   }
