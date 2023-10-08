@@ -17,9 +17,9 @@
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  pnpm install
+2.  pnpm test
+3.  example目录下面使用live server运行测试
 
 #### Vue3 VNode渲染过程
 1.  createAppAPI(createApp)App的创建
