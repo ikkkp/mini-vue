@@ -1,7 +1,7 @@
 import { ShapeFlags } from "@mini-vue/shared/src/shapeFlags";
 import { createComponentInstance } from "./component";
 import { queueJob } from "./scheduler";
-// import { effect } from "@mini-vue/reactivity";
+import { effect } from "@mini-vue/reactivity";
 import { setupComponent } from "./component";
 import { Fragment, normalizeVNode, Text } from "./vnode";
 import { shouldUpdateComponent } from "./componentRenderUtils";
