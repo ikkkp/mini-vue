@@ -49,6 +49,12 @@ importers:
         specifier: workspace:^1.0.0
         version: link:../shared
 
+  packages/reactivity:
+    dependencies:
+      '@mini-vue/shared':
+        specifier: workspace:^1.0.0
+        version: link:../shared
+        
   packages/shared: {}
 
 packages:
