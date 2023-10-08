@@ -24,6 +24,7 @@ describe("component: emits", () => {
     render(h(Comp), nodeOps.createElement("div"));
 
     expect(onfoo).not.toHaveBeenCalled();
+    
     // only capitalized or special chars are considered event listeners
     expect(onBar).toHaveBeenCalled();
   });
