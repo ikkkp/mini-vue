@@ -40,6 +40,7 @@ export function ref(value) {
   return createRef(value);
 }
 
+//reactive进行对象的proxy
 function convert(value) {
   return isObject(value) ? reactive(value) : value;
 }
