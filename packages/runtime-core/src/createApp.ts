@@ -9,6 +9,7 @@ export function createAppAPI(render) {
         const vnode = createVNode(rootComponent);
         console.log("调用 render，基于 vnode 进行开箱");
         //
+        //
         render(vnode, rootContainer);
       },
     };
