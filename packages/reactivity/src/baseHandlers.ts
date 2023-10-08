@@ -37,6 +37,7 @@ function createGetter(isReadonly = false, shallow = false) {
       return target;
     }
 
+    //Reflect.get方法允许你从一个对象中取属性值。就如同属性访问器 语法，但却是通过函数调用来实现。
     const res = Reflect.get(target, key, receiver);
 
     // 问题：为什么是 readonly 的时候不做依赖收集呢
