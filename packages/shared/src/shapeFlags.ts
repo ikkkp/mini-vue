@@ -1,4 +1,5 @@
 // 组件的类型
+// 用于标志组件的类型
 export const enum ShapeFlags {
     // 最后要渲染的 element 类型
     ELEMENT = 1,
