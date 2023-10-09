@@ -1,4 +1,4 @@
-import { ShapeFlags } from "@mini-vue/shared/src/shapeFlags";
+import { ShapeFlags } from "@mini-vue/shared";
 import { createComponentInstance } from "./component";
 import { queueJob } from "./scheduler";
 import { effect } from "@mini-vue/reactivity";

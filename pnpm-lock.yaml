@@ -43,13 +43,19 @@ importers:
         specifier: ^0.22.1
         version: registry.npmmirror.com/vitest@0.22.1
 
-  packages/runtime-core:
+  packages/compile-core:
     dependencies:
       '@mini-vue/shared':
         specifier: workspace:^1.0.0
         version: link:../shared
 
   packages/reactivity:
+    dependencies:
+      '@mini-vue/shared':
+        specifier: workspace:^1.0.0
+        version: link:../shared
+
+  packages/runtime-core:
     dependencies:
       '@mini-vue/shared':
         specifier: workspace:^1.0.0
@@ -63,7 +69,7 @@ importers:
       '@mini-vue/shared':
         specifier: workspace:^1.0.0
         version: link:../shared
-        
+
   packages/shared: {}
 
 packages:
