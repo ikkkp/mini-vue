@@ -49,7 +49,7 @@ function createGetter(isReadonly = false, shallow = false) {
       track(target, "get", key);
 
 
-      
+
     }
 
     if (shallow) {
@@ -78,6 +78,8 @@ function createSetter() {
   };
 }
 
+/* readonly()​
+接受一个对象 (不论是响应式还是普通的) 或是一个 ref，返回一个原值的只读代理。 */
 export const readonlyHandlers = {
   get: readonlyGet,
   set(target, key) {
