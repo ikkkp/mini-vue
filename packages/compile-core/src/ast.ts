@@ -26,7 +26,7 @@ export function createSimpleExpression(content) {
     content,
   };
 }
-
+  
 export function createInterpolation(content) {
   return {
     type: NodeTypes.INTERPOLATION,
