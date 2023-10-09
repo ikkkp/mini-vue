@@ -1,5 +1,12 @@
 import { CREATE_ELEMENT_VNODE } from "./runtimeHelpers";
 
+/**
+* @Description:抽象语法树节点类型枚举
+* @Version:1.0
+* @Author:Huangzl
+* @Date:2023/10/09 16:41:45
+*/
+
 export const enum NodeTypes {
   TEXT,
   ROOT,
