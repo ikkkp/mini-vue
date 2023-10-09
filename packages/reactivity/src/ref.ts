@@ -55,6 +55,7 @@ export function triggerRefValue(ref) {
   triggerEffects(ref.dep);
 }
 
+// 收集依赖
 export function trackRefValue(ref) {
   if (isTracking()) {
     trackEffects(ref.dep);
