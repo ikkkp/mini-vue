@@ -1,4 +1,4 @@
-import { ShapeFlags } from "@mini-vue/shared/src/shapeFlags";
+import { ShapeFlags } from "@mini-vue/shared";
 
 export { createVNode as createElementVNode }
 
