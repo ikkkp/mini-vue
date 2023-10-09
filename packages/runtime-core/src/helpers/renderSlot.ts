@@ -12,6 +12,14 @@ import { createVNode, Fragment } from "../vnode";
  *
  * @private
  */
+
+/**
+* @Description:
+* @Version:1.0
+* @Author:Huangzl
+* @Date:2023/10/09 09:19:50
+*/
+
 export function renderSlot(slots, name: string, props = {}) {
   const slot = slots[name];
   console.log(`渲染插槽 slot -> ${name}`);
