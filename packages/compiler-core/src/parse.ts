@@ -112,7 +112,7 @@ function parseTag(context: any, type: TagType): any {
   const match: any = /^<\/?([a-z][^\r\n\t\f />]*)/i.exec(context.source);
   const tag = match[1];
 
-  // 移动光标
+  // 移动光标9
   // <div
   advanceBy(context, match[0].length);
 
@@ -142,7 +142,7 @@ function parseInterpolation(context: any) {
 
   const closeIndex = context.source.indexOf(
     closeDelimiter,
-    openDelimiter.length
+    openDelimiter.length  
   );
 
   // TODO closeIndex -1 需要报错的
