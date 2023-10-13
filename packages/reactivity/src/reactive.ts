@@ -4,6 +4,13 @@ import {
   shallowReadonlyHandlers,
 } from "./baseHandlers";
 
+/**
+* @Description:作用订阅将被存储在一个全局的 WeakMap<target, Map<key, Set<effect>>> 数据结构
+* @Version:1.0
+* @Author:Huangzl
+* @Date:2023/10/13 19:36:49
+*/
+
 export const reactiveMap = new WeakMap();
 export const readonlyMap = new WeakMap();
 export const shallowReadonlyMap = new WeakMap();
