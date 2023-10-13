@@ -4,6 +4,12 @@ import { nextTick } from "../src/scheduler";
 import { vi } from "vitest";
 
 //test
+/**
+* @Description:watchEffect
+* @Version:1.0
+* @Author:Huangzl
+* @Date:2023/10/13 20:30:47
+*/
 describe("api: watch", () => {
   it("effect", async () => {
     const state = reactive({ count: 0 });
