@@ -19,7 +19,7 @@ describe("ref", () => {
     a.value = 2;
     expect(calls).toBe(2);
     expect(dummy).toBe(2);
-    a.value = 7;
+
   });
 
   it("should make nested properties reactive", () => {
