@@ -17,6 +17,12 @@ export class RefImpl {
     this.dep = createDep();
   }
 
+  /**
+  * @Description:set,get拦截器
+  * @Version:1.0
+  * @Author:Huangzl
+  * @Date:2023/10/16 17:11:49
+  */
   get value() {
     // 收集依赖
     trackRefValue(this);
