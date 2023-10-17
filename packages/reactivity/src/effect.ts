@@ -38,6 +38,7 @@ export class ReactiveEffect {
     // 执行 fn  并收集依赖
     // 可以开始收集依赖了
     shouldTrack = true;
+    
 
     // 执行的时候给全局的 activeEffect 赋值
     // 利用全局属性来获取当前的 effect
