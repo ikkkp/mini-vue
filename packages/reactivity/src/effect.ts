@@ -35,7 +35,7 @@ export class ReactiveEffect {
       return this.fn();
     }
 
-    // 执行 fn  收集依赖
+    // 执行 fn  并收集依赖
     // 可以开始收集依赖了
     shouldTrack = true;
 
