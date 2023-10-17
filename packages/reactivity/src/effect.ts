@@ -83,6 +83,8 @@ function cleanupEffect(effect) {
 * @Date:2023/10/17 09:24:48
 */
 export function effect(fn, options = {}) {
+  // 第一个参数就是要运行的副作用函数。这个副作用函数的参数也是一个函数，用来注册清理回调。。
+  // 第二个参数是一个可选的选项，可以用来调整副作用的刷新时机或调试副作用的依赖。
   const _effect = new ReactiveEffect(fn);
 
   // 把用户传过来的值合并到 _effect 对象上去
