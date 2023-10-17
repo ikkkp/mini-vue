@@ -128,12 +128,12 @@ export function track(target, type, key) {
   trackEffects(dep);
 }
 
-/**
-* @Description:
-* @Version:1.0
-* @Author:Huangzl
-* @Date:2023/10/17 12:11:04
-*/
+  /**
+  * @Description:
+  * @Version:1.0
+  * @Author:Huangzl
+  * @Date:2023/10/17 12:11:04
+  */
 export function trackEffects(dep) {
   // 用 dep 来存放所有的 effect
   // TODO
