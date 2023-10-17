@@ -75,6 +75,13 @@ function cleanupEffect(effect) {
   effect.deps.length = 0;
 }
 
+
+/**
+* @Description:作用相当watchEffect()，立即运行一个函数，同时响应式地追踪其依赖，并在依赖更改时重新执行。
+* @Version:1.0
+* @Author:Huangzl
+* @Date:2023/10/17 09:24:48
+*/
 export function effect(fn, options = {}) {
   const _effect = new ReactiveEffect(fn);
 
