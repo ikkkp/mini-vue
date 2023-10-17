@@ -69,13 +69,18 @@ export function toRaw(value) {
   return value[ReactiveFlags.RAW];
 }
 
+/**
+* @Description:
+* @Version:1.0
+* @Author:Huangzl
+* @Date:2023/10/17 11:56:56
+*/
 function createReactiveObject(target, proxyMap, baseHandlers) {
   // 核心就是 proxy
   // 目的是可以侦听到用户 get 或者 set 的动作
 
-  // 如果命中的话就直接返回就好了
-  // 使用缓存做的优化点
   const existingProxy = proxyMap.get(target);
+  
   if (existingProxy) {
     return existingProxy;
   }
