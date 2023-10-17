@@ -13,7 +13,7 @@ export class ReactiveEffect {
   /*  */
   
   /**
-  * @Description:
+  * @Description:用于依赖收集
   * @Version:1.0
   * @Author:Huangzl
   * @Date:2023/10/11 10:47:59
