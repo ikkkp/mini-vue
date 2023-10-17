@@ -4,21 +4,23 @@ import { isRef, ref, unRef,proxyRefs } from "../src/ref";
 describe("ref", () => {
   it("should be reactive", () => {
     const a = ref(1);
+    const b = ref(1);
     let dummy;
     let calls = 0;
     effect(() => {
       calls++;
-      dummy = a.value;
+      dummy = a.value+b.value;
     });
     expect(calls).toBe(1);
-    expect(dummy).toBe(1);
-    a.value = 2;
-    expect(calls).toBe(2);
     expect(dummy).toBe(2);
+    b.value = 2;
+    a.value = 2;
+    expect(calls).toBe(3);
+    expect(dummy).toBe(4);
     // same value should not trigger
     a.value = 2;
-    expect(calls).toBe(2);
-    expect(dummy).toBe(2);
+    expect(calls).toBe(3);
+    expect(dummy).toBe(4);
 
   });
 
