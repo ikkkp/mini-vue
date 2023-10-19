@@ -86,6 +86,7 @@ function createReactiveObject(target, proxyMap, baseHandlers) {
     return existingProxy;
   }
 
+  
   const proxy = new Proxy(target, baseHandlers);
 
   // 把创建好的 proxy 给存起来，
