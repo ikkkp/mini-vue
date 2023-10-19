@@ -37,6 +37,7 @@ export class RefImpl {
       this._value = convert(newValue);
       this._rawValue = newValue;
       // 触发依赖
+      
       triggerRefValue(this);
     }
   }
