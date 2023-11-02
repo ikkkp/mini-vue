@@ -41,7 +41,7 @@ function createReactiveObject(target, baseHandlers) {
     * @Date:2023/11/02 11:12:49
     * @TODO:缓存使用另一个weekmap()，而不是直接使用targetMap;
     */
-   
+
     // targetMap.set(target, observed);
     return observed;
 
@@ -83,28 +83,24 @@ function track(target: Object, key: any) {
         depsMap.set(key, dep);
     }
     // 收集依赖
-    trackEffects(dep);
-}
-export function trackEffects(dep) {
-    // 用 dep 来存放所有的 effect
-    // TODO
-    // 这里是一个优化点
-    // 先看看这个依赖是不是已经收集了，
-    // 已经收集的话，那么就不需要在收集一次了
-    // 可能会影响 code path change 的情况
-    // 需要每次都 cleanupEffect
-    // shouldTrack = !dep.has(activeEffect!);
+    /**
+    * @Description:
+    * @Version:1.0
+    * @Author:Huangzl
+    * @Date:2023/11/02 20:32:00
+    * @TODO:这边有一个优化点，就是如果已经收集过了，那么就不需要再次收集了
+    */
     if (!dep.has(activeEffect)) {
         dep.add(activeEffect);
-        (activeEffect as any).deps.push(dep);
     }
 }
+
 
 
 function trigger(target: any, key: any) {
     const deps: Array<any> = [];
     // 获取 target 对应的 depsMap
-    const depsMap = targetMap.get(target);
+    const depsMap: Map<any, any> = targetMap.get(target);
     console.log('depsMap', typeof depsMap);
     if (!depsMap) {
         return;
@@ -113,15 +109,10 @@ function trigger(target: any, key: any) {
     const dep = depsMap.get(key);
     // 最后收集到 deps 内
     deps.push(dep);
-    const effects: Array<any> = [];
-    deps.forEach((dep) => {
-        // 这里解构 dep 得到的是 dep 内部存储的 effect
-        effects.push(...dep);
-    });
     if (dep) {
         // 触发依赖
         dep.forEach((effect: any) => {
-            // wrap the original fn function and add it to the effect stack
+            // wrap the original fn function and add it to the effect stack，解决无限循环问题
             const wrappedFn = () => {
                 effectStack.push(wrappedFn);
                 effect();
