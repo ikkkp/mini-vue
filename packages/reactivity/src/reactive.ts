@@ -81,12 +81,11 @@ function createReactiveObject(target, proxyMap, baseHandlers) {
   // 目的是可以侦听到用户 get 或者 set 的动作
 
   const existingProxy = proxyMap.get(target);
-  
+
   if (existingProxy) {
     return existingProxy;
   }
 
-  
   const proxy = new Proxy(target, baseHandlers);
 
   // 把创建好的 proxy 给存起来，
