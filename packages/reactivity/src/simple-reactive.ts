@@ -41,7 +41,7 @@ function createReactiveObject(target, baseHandlers) {
     * @Date:2023/11/02 11:12:49
     * @TODO:缓存使用另一个weekmap()，而不是直接使用targetMap;
     */
-
+   
     // targetMap.set(target, observed);
     return observed;
 
@@ -90,7 +90,7 @@ function track(target: Object, key: any) {
     * @Date:2023/11/02 20:32:00
     * @TODO:这边有一个优化点，就是如果已经收集过了，那么就不需要再次收集了
     */
-    if (!dep.has(activeEffect)) {
+    if(!dep.has(activeEffect)){
         dep.add(activeEffect);
     }
 }
@@ -98,32 +98,34 @@ function track(target: Object, key: any) {
 
 
 function trigger(target: any, key: any) {
-    const deps: Array<any> = [];
+    let deps: Array<any> = [];
     // 获取 target 对应的 depsMap
-    const depsMap: Map<any, any> = targetMap.get(target);
+    const depsMap:Map<any,any> = targetMap.get(target);
     console.log('depsMap', typeof depsMap);
     if (!depsMap) {
         return;
     }
     // 获取 target 对应的 dep
     const dep = depsMap.get(key);
+    const effects: Array<any> = [];
     // 最后收集到 deps 内
     deps.push(dep);
-    if (dep) {
-        // 触发依赖
-        dep.forEach((effect: any) => {
-            // wrap the original fn function and add it to the effect stack，解决无限循环问题
-            const wrappedFn = () => {
-                effectStack.push(wrappedFn);
-                effect();
-                effectStack.pop();
-            };
-            wrappedFn();
-        });
-    }
+    deps.forEach((dep) => {
+      // 这里解构 dep 得到的是 dep 内部存储的 effect
+      effects.push(...dep);
+    });
+    // 触发依赖
+    effects.forEach((effect) => {
+      effect();
+    });
 }
 
-
+/**
+* @Description:这个effect还未实现响应式跟踪
+* @Version:1.0
+* @Author:Huangzl
+* @Date:2023/11/02 21:07:10
+*/
 export function effect(fn) {
     // 把 fn 做成响应式的
     const effect = createReactiveEffect(fn);
