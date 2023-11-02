@@ -3,11 +3,11 @@ import { reactive } from "../src/simple-reactive";
 
 describe("reactive", () => {
     it("should be reactive", () => {
-        const original = {name: "xiaohong"};
+        const original = {name: "xiaohong",age: 17};
         var test = reactive(original);
         effect(() => {
             console.log(test.name);
-            console.log(test.name);
+            console.log(test.age);
         });
         expect(test.name).toBe("xiaohong");
         test.name = "xiaoming";
