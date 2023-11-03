@@ -14,6 +14,7 @@ const set = createSetter();
 const readonlyGet = createGetter(true);
 const shallowReadonlyGet = createGetter(true, true);
 
+
 function createGetter(isReadonly = false, shallow = false) {
   return function get(target, key, receiver) {
     const isExistInReactiveMap = () =>
