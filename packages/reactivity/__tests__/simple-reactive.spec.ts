@@ -1,4 +1,3 @@
-import { e } from "vitest/dist/index-ea17aa0c";
 import { effect } from "../src/simple-reactive";
 import { reactive } from "../src/simple-reactive";
 

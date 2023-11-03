@@ -92,6 +92,7 @@ function track(target: Object, key: any) {
     */
     if(!dep.has(activeEffect)){
         dep.add(activeEffect);
+        (activeEffect as any).deps.push(dep);
     }
 }
 
@@ -118,27 +119,50 @@ function trigger(target: any, key: any) {
     effects.forEach((effect) => {
       effect();
     });
+    triggerEffects(dep);
 }
-
-/**
-* @Description:这个effect还未实现响应式跟踪
-* @Version:1.0
-* @Author:Huangzl
-* @Date:2023/11/02 21:07:10
-*/
-export function effect(fn) {
-    // 把 fn 做成响应式的
-    const effect = createReactiveEffect(fn);
-    // 立即执行一次
-    effect();
-}
-
-export function createReactiveEffect(fn) {
-    const effect = function () {
-        return run(effect, fn);
+export function triggerEffects(dep) {  
+    for (const effect of dep) {
+            effect();
     }
+}
+export function isTracking() {
+    return shouldTrack && activeEffect !== undefined;
+}
+
+
+
+export class ReactiveEffect {
+    active = true;
+    deps = [];
+    shouldTrack = false;
+
+    constructor(public fn, public scheduler?) {
+        console.log("创建 ReactiveEffect 对象");
+    }
+
+    run() {
+        if (!this.active) {
+            return this.fn();
+        }
+        this.shouldTrack = true;
+        this.active = true;
+        this.fn();
+    }
+}
+
+export function effect(fn) {
+    const effect = createReactiveEffect(fn);
+    effect();
     return effect;
 }
+
+function createReactiveEffect(fn) {
+    const _effect = new ReactiveEffect(fn);
+    activeEffect = _effect as any;
+    return _effect.run.bind(_effect);
+}
+
 
 function run(effect, fn) {
     try {
@@ -149,6 +173,3 @@ function run(effect, fn) {
     }
 }
 
-export function isTracking() {
-    return shouldTrack && activeEffect !== undefined;
-}
