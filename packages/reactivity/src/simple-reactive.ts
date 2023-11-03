@@ -7,11 +7,10 @@ import { createDep } from "./dep";
 */
 
 // 1. 通过 Proxy 对象来实现响应式
-
 // 2. 通过 WeakMap 来实现缓存
 //const reactiveMap = new WeakMap();
+export const reactiveMap = new WeakMap();
 export const targetMap = new WeakMap();
-export const effectStack: any = [];
 let activeEffect = void 0;
 let shouldTrack = false;
 
@@ -27,22 +26,15 @@ function createReactiveObject(target, baseHandlers) {
     }
 
     // 如果已经是响应式对象的话，那么就直接返回
-    if (targetMap.has(target)) {
-        return targetMap.get(target);
+    if (reactiveMap.has(target)) {
+        return reactiveMap.get(target);
     }
 
     // 创建响应式对象
     const observed = new Proxy(target, baseHandlers);
     // 把响应式对象缓存起来
-    /**
-    * @Description:
-    * @Version:1.0
-    * @Author:Huangzl
-    * @Date:2023/11/02 11:12:49
-    * @TODO:缓存使用另一个weekmap()，而不是直接使用targetMap;
-    */
-   
-    // targetMap.set(target, observed);
+    //缓存使用另一个weekmap() reactiveMap，而不是直接使用targetMap;
+    reactiveMap.set(target, observed);
     return observed;
 
 }
@@ -65,9 +57,7 @@ const mutableHandlers = {
 }
 
 function track(target: Object, key: any) {
-    if (!isTracking()) {
-        return;
-    }
+
     // 获取 target 对应的 depsMap
     let depsMap = targetMap.get(target);
     if (!depsMap) {
@@ -75,6 +65,7 @@ function track(target: Object, key: any) {
         depsMap = new Map();
         targetMap.set(target, depsMap);
     }
+
     // 获取 target 对应的 dep
     let dep = depsMap.get(key);
     if (!dep) {
@@ -82,15 +73,10 @@ function track(target: Object, key: any) {
         dep = createDep();
         depsMap.set(key, dep);
     }
-    // 收集依赖
-    /**
-    * @Description:
-    * @Version:1.0
-    * @Author:Huangzl
-    * @Date:2023/11/02 20:32:00
+    /** 收集依赖
     * @TODO:这边有一个优化点，就是如果已经收集过了，那么就不需要再次收集了
     */
-    if(!dep.has(activeEffect)){
+    if (!dep.has(activeEffect)) {
         dep.add(activeEffect);
         (activeEffect as any).deps.push(dep);
     }
@@ -101,8 +87,7 @@ function track(target: Object, key: any) {
 function trigger(target: any, key: any) {
     let deps: Array<any> = [];
     // 获取 target 对应的 depsMap
-    const depsMap:Map<any,any> = targetMap.get(target);
-    console.log('depsMap', typeof depsMap);
+    const depsMap: Map<any, any> = targetMap.get(target);
     if (!depsMap) {
         return;
     }
@@ -110,20 +95,16 @@ function trigger(target: any, key: any) {
     const dep = depsMap.get(key);
     const effects: Array<any> = [];
     // 最后收集到 deps 内
-    deps.push(dep);
+    deps.push(...dep);
     deps.forEach((dep) => {
-      // 这里解构 dep 得到的是 dep 内部存储的 effect
-      effects.push(...dep);
+        // 这里解构 dep 得到的是 dep 内部存储的 effect
+        effects.push(...deps);
     });
-    // 触发依赖
-    effects.forEach((effect) => {
-      effect();
-    });
-    triggerEffects(dep);
+    triggerEffects(effects);
 }
-export function triggerEffects(dep) {  
+export function triggerEffects(dep) {
     for (const effect of dep) {
-            effect();
+        effect.run();
     }
 }
 export function isTracking() {
@@ -134,9 +115,8 @@ export function isTracking() {
 
 export class ReactiveEffect {
     active = true;
-    deps = [];
     shouldTrack = false;
-
+    deps = [];
     constructor(public fn, public scheduler?) {
         console.log("创建 ReactiveEffect 对象");
     }
@@ -149,6 +129,11 @@ export class ReactiveEffect {
         this.active = true;
         this.fn();
     }
+    stop() {
+        if (this.active) {
+          this.active = false;
+        }
+      }
 }
 
 export function effect(fn) {
@@ -164,12 +149,5 @@ function createReactiveEffect(fn) {
 }
 
 
-function run(effect, fn) {
-    try {
-        effectStack.push(effect);
-        fn();
-    } finally {
-        effectStack.pop();
-    }
-}
+
 
