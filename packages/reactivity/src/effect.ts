@@ -10,14 +10,7 @@ export class ReactiveEffect {
   active = true;
   deps = [];
   public onStop?: () => void;
-  /*  */
-  
-  /**
-  * @Description:用于依赖收集
-  * @Version:1.0
-  * @Author:Huangzl
-  * @Date:2023/10/11 10:47:59
-  */
+
   constructor(public fn, public scheduler?) {
     console.log("创建 ReactiveEffect 对象");
   }
@@ -38,7 +31,6 @@ export class ReactiveEffect {
     // 执行 fn  并收集依赖
     // 可以开始收集依赖了
     shouldTrack = true;
-    
 
     // 执行的时候给全局的 activeEffect 赋值
     // 利用全局属性来获取当前的 effect
@@ -147,6 +139,7 @@ export function trackEffects(dep) {
   if (!dep.has(activeEffect)) {
     dep.add(activeEffect);
     (activeEffect as any).deps.push(dep);
+    
   }
 }
 
