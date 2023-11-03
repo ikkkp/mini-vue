@@ -47,7 +47,12 @@ const mutableHandlers = {
     get(target, key) {
         // 收集依赖
         track(target, key);
-        return Reflect.get(target, key);
+        const result = Reflect.get(target, key);
+        // 如果结果是一个对象，那么就将其转换为响应式对象
+        if (isObject(result)) {
+            return reactive(result);
+        }
+        return result;
     },
     set(target, key, value) {
         // 触发依赖
@@ -93,12 +98,15 @@ function trigger(target: any, key: any) {
     }
     // 获取 target 对应的 dep
     const dep = depsMap.get(key);
+    if (!dep) {
+        return;
+    }
     const effects: Array<any> = [];
     // 最后收集到 deps 内
     deps.push(...dep);
     deps.forEach((dep) => {
         // 这里解构 dep 得到的是 dep 内部存储的 effect
-        effects.push(...deps);
+        effects.push(dep);
     });
     triggerEffects(effects);
 }
@@ -125,6 +133,7 @@ export class ReactiveEffect {
         if (!this.active) {
             return this.fn();
         }
+        console.log("执行 ReactiveEffect 对象");
         this.shouldTrack = true;
         this.active = true;
         this.fn();
