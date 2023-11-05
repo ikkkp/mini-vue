@@ -213,6 +213,7 @@ function advanceBy(context, numberOfCharacters) {
   context.source = context.source.slice(numberOfCharacters);
 }
 
+
 function createRoot(children) {
   return {
     type: NodeTypes.ROOT,
