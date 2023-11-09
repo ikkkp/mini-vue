@@ -63,7 +63,7 @@ function createReactiveObject(target, baseHandlers) {
  * @returns 值是否为对象。
  */
 function isObject(target) {
-    return target !== null && typeof target === 'object';
+    return  typeof target === "object" && target !== null;
 }
 
 /**
