@@ -1,10 +1,11 @@
 import { CREATE_ELEMENT_VNODE } from "./runtimeHelpers";
 
 /**
-* @Description:抽象语法树节点类型枚举
-* @Version:1.0
-* @Author:Huangzl
-* @Date:2023/10/09 16:41:45
+* @description 
+* @version 1.0
+* @author Huangzl
+* @fileName ast.ts
+* @date 2023/11/09 15:06:15
 */
 
 export const enum NodeTypes {
@@ -40,9 +41,11 @@ export function createVNodeCall(context, tag, props?, children?) {
   }
 
   return {
-    // TODO vue3 里面这里的 type 是 VNODE_CALL
-    // 是为了 block 而 mini-vue 里面没有实现 block 
-    // 所以创建的是 Element 类型就够用了
+    /**
+    * @author Huangzl
+    * @date 2023/11/09 15:08:25
+    * @TODO VUE3.0 源码中的 type 是一个 Symbol 类型，这里暂时用 NodeTypes.ELEMENT 代替
+    */
     type: NodeTypes.ELEMENT,
     tag,
     props,

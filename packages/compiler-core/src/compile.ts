@@ -6,10 +6,11 @@ import { transformElement } from "./transforms/transformElement";
 import { transformText } from "./transforms/transformText";
 
 /**
-* @Description:template模板编译
-* @Version:1.0
-* @Author:Huangzl
-* @Date:2023/10/09 16:42:45
+* @description 
+* @version 1.0
+* @author Huangzl
+* @fileName compile.ts
+* @date 2023/11/09 15:17:39
 */
 
 export function baseCompile(template, options) {
