@@ -14,7 +14,6 @@ export function transform(root, options = {}) {
   root.helpers.push(...context.helpers.keys());
 }
 
-
 function traverseNode(node: any, context) {
   const type: NodeTypes = node.type;
 

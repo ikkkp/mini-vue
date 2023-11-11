@@ -582,7 +582,6 @@ export function createRenderer(options) {
         // 把 effect 推到微任务的时候在执行
         // queueJob(effect);
         queueJob(instance.update);
-
       },
     });
   }

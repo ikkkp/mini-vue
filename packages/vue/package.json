@@ -8,7 +8,11 @@
     "serve": "serve ."
   },
   "keywords": [],
+<<<<<<< HEAD
   "author": "",
+=======
+  "author": "cuixiaorui",
+>>>>>>> 07e4e10a5ccde25a78d4554c864030ddc6c4f1a3
   "license": "ISC",
   "dependencies": {
     "@mini-vue/compiler-core": "workspace:^1.0.0",

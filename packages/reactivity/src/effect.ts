@@ -10,7 +10,6 @@ export class ReactiveEffect {
   active = true;
   deps = [];
   public onStop?: () => void;
-
   constructor(public fn, public scheduler?) {
     console.log("创建 ReactiveEffect 对象");
   }
