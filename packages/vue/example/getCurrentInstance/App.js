@@ -5,7 +5,7 @@ export default {
   name: "App",
   setup() {
 
-    console.log(getCurrentInstance())
+    console.log("getCurrentInstance ==>",getCurrentInstance())
 
 
 

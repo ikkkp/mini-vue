@@ -3,6 +3,7 @@ import {vi} from 'vitest'
 
 describe("component: emits", () => {
   test("trigger handlers", () => {
+    console.log("console logs the h",h("div", null, "hello"));
     const Foo = {
       render() {
         return h("foo");
@@ -13,6 +14,7 @@ describe("component: emits", () => {
         emit("bar");
       },
     };
+    
 
     const onfoo = vi.fn();
     const onBar = vi.fn();
@@ -26,6 +28,7 @@ describe("component: emits", () => {
     expect(onfoo).not.toHaveBeenCalled();
     
     // only capitalized or special chars are considered event listeners
+
     expect(onBar).toHaveBeenCalled();
   });
 
